@@ -20,7 +20,8 @@ app.use(express.static(__dirname + '/static')); // for lets encrypt challenge
 
 //  start listening, port 443 for production (HTTPS) and 80 for a dev environment (HTTP)
 // adjsut as needed
-if(process.env.PROD != undefined && process.env.PROD.toLowerCase() === 'true') {
+if(process.env.LETSENCRYPT_FULLCHAIN && process.env.LETSENCRYPT_PRIV &&
+    process.env.PROD && process.env.PROD.toLowerCase() === 'true') {
     const options = {
         cert: fs.readFileSync(process.env.LETSENCRYPT_FULLCHAIN),
         key: fs.readFileSync(process.env.LETSENCRYPT_PRIV)
